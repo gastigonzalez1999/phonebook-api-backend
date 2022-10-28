@@ -26,8 +26,9 @@ const data = [
     }
 ];
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
+app.use(express.static('build'));
 
 app.use(morgan((tokens, req, res) => {
     return [
@@ -47,7 +48,7 @@ app.get('/api/persons', (request, response) => {
 app.get('/info', (request, response) => {
     const currentDate = new Date().toLocaleString();
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-    Person.find({}).then(persons => {
+    data.find({}).then(persons => {
         response.send(
             `
             <div>
